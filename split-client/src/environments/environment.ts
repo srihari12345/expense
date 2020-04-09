@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  BASE_URL: "http://localhost:3000/",
+  BASE_URL: "https://fierce-stream-20585.herokuapp.com/",
   API_VERSION: 'api/v1/',
   SUB_PATH: {
     GROUP: 'group/',

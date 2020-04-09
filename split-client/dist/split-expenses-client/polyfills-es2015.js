@@ -3034,7 +3034,7 @@ window.global = window;
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /home/srihari/Documents/expense-split/split-expenses-client/src/polyfills.ts */"./src/polyfills.ts");
+module.exports = __webpack_require__(/*! /home/srihari/Documents/expense-split/split-client/src/polyfills.ts */"./src/polyfills.ts");
 
 
 /***/ })
