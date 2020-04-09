@@ -23,7 +23,8 @@ app.use(routeLoggerMiddleware.logIp);
 app.use(globalErrorMiddleware.globalErrorHandler);
 
 
-app.use(express.static(path.join(__dirname, 'client')));
+app.use(express.static(path.join(__dirname, 'split-client/dist/split-expenses-client/index.html')));
+
 
 
 const modelsPath = './app/models';
@@ -68,17 +69,21 @@ app.use(globalErrorMiddleware.globalNotFoundHandler);
 /**
  * Create HTTP server.
  */
+let ports = process.env.PORT;
+if(ports==null || ports =="") {
+  ports = appConfig.port
+}
+
 
 const server = http.createServer(app);
 // start listening to http server
 console.log(appConfig);
-server.listen(appConfig.port);
+server.listen(ports);
 server.on('error', onError);
 server.on('listening', onListening);
 
 // end server listening code
-const servers = http.createServer();
-servers.listen(3001)
+
 
 const socketLib = require("./app/libs/socketLib");
 const socketServer = socketLib.setServer(server);

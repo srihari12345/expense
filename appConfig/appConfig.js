@@ -1,6 +1,6 @@
 let appConfig = {};
 
-appConfig.port = 'https://fierce-stream-20585.herokuapp.com/';
+appConfig.port = 3000;
 appConfig.allowedCorsOrigin = "*";
 appConfig.env = "dev";
 appConfig.db = {
