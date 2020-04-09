@@ -1,0 +1,147 @@
+
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@import '~@angular/material/theming';
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat-core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$split-expenses-client-primary: mat-palette($mat-indigo);
+$split-expenses-client-accent: mat-palette($mat-pink, A200, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$split-expenses-client-warn: mat-palette($mat-red);
+
+// Create the theme object (a Sass map containing all of the palettes).
+$split-expenses-client-theme: mat-light-theme($split-expenses-client-primary, $split-expenses-client-accent, $split-expenses-client-warn);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include angular-material-theme($split-expenses-client-theme);
+
+/* You can add global styles to this file, and also import other style files */
+@import "~bootstrap/dist/css/bootstrap.css";
+
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.full-width-field{
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.half-width-field{
+    width: 46%;
+    margin-bottom: 15px;
+    &.ML4 {
+        margin-left: 4%;
+    }
+    &.MR4{
+        margin-right: 4%;;
+    }
+}
+
+.M0{
+    margin: 0;
+}
+
+.MB15 {
+    margin-bottom: 15px;
+}
+
+.MT50{
+    margin-top: 50px;
+}
+
+._30width{
+    width: 30%;
+}
+
+._70width{
+    width: 70%;
+}
+
+.btn-success {
+    width: auto;
+    margin: 15px 0 0;
+    float: right;
+    a{
+        color:#fff;
+        span {
+            vertical-align: sub;
+            font-size: 20px;
+        }
+    }
+    &:hover{
+        color: #fff;
+    }
+}
+
+.clear-both {
+    clear: both;
+}
+
+.flex-even {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.card {
+    .card-header{
+        h3.card-title{
+            margin-bottom: 0;
+            display: inline-block;
+        }
+        button{
+            float: right;
+        }
+    }
+}
+
+
+.card-text:last-child {
+    margin-bottom: 15px;
+}
+
+.MTB15 {
+    margin: 15px 0 !important;
+}
+
+.float-right{
+    float: right !important;
+}
+
+.send-button:hover,
+.send-button:focus {
+  outline: 0;
+  background-color: #ffcc00;
+  color: #000;
+  -webkit-transition: -webkit-transform 0.3s;
+  transition: transform 0.3s;
+}
+
+.M0 {
+    margin: 0;
+}
+
+.justify-flex-end {
+    justify-content: flex-end;
+}
+
+.icons {
+    width: 30px;
+    height: 30px;
+    background: #ddd;
+    color: #333;
+    padding: 3px;
+    border-radius: 50%;
+}

@@ -1,0 +1,36 @@
+.userName{
+    font-size: 14px;
+    text-align: center;
+    color: #fff;
+    margin: 10px 15px;
+}
+
+.navbar-nav .nav-item a{
+    font-size: 16px;
+    color: #fff;
+    padding: 0 20px;
+}
+
+.navbar-nav .nav-item a.dropdown-item{
+    color: #313131;
+    padding: 5px 15px;
+}
+
+
+a.notifAnchor{
+    position: relative;
+.notificationIconPointer{
+    background-color: #69ce1e;
+    color: #313131;
+    border-radius: 50%;
+    padding: 1px;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    position: absolute;
+    top: -7px;
+    left: -7px;
+    font-size: 12px;
+    font-weight: bold;
+}
+}

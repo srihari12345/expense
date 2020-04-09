@@ -1,0 +1,144 @@
+<div class="container-fluid">
+  <div class="content">
+    <div class="container">
+      <div class="c1">
+        <div class="c11">
+          <h1 class="mainhead">PICK YOUR SPOT</h1>
+          <p class="mainp">Just click the buttons below to toggle between SignIn & SignUp</p>
+        </div>
+        <div id="left" (click)="showMenu('signin')" [ngClass]="{'left_hover': toggle}">
+          <h1 class="s1class" [ngStyle]="{'color': toggle ? '#EE9BA3' : '#748194'}"><span>SIGN</span><span
+              class="su">IN</span>
+          </h1>
+        </div>
+        <div id="right" (click)="showMenu('signup')" [ngClass]="{'right_hover': !toggle}">
+          <h1 class="s2class" [ngStyle]="{'color': !toggle ? '#EE9BA3' : '#748194'}"><span>SIGN</span><span
+              class="su">UP</span></h1>
+        </div>
+      </div>
+
+      <div class="c2">
+        <div class="container-fluid" [ngStyle]="{'display': !toggle ? 'block' : 'none'}">
+          <div class="row M0">
+            <div class="col-12">
+              <h1 class="signup1">SIGN UP</h1>
+              <form class="signup" [formGroup]="signUpForm" (ngSubmit)='signUp()'>
+                <mat-form-field class="half-width-field MR4">
+                  <mat-label>First Name</mat-label>
+                  <span class="material-icons" matSuffix>
+                    person_outline
+                  </span>
+                  <input matInput formControlName="firstName" placeholder="John" autocomplete="off">
+                  <mat-error *ngIf="signUpForm.controls.firstName.hasError('required')">
+                    First Name is <strong>required</strong>
+                  </mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="half-width-field ML4">
+                  <mat-label>Last Name</mat-label>
+                  <span class="material-icons" matSuffix>
+                    person_outline
+                  </span>
+                  <input matInput formControlName="lastName" placeholder="Doe" autocomplete="off">
+                  <mat-error *ngIf="signUpForm.controls.lastName.hasError('required')">
+                    Last Name is <strong>required</strong>
+                  </mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="full-width-field">
+                  <mat-label>Email</mat-label>
+                  <span class="material-icons" matSuffix>
+                    person_outline
+                  </span>
+                  <input matInput formControlName="email" placeholder="Ex. pat@example.com" autocomplete="off">
+                  <mat-error
+                    *ngIf="signUpForm.controls.email.hasError('email') && !signUpForm.controls.email.hasError('required')">
+                    Please enter a valid email address
+                  </mat-error>
+                  <mat-error *ngIf="signUpForm.controls.email.hasError('required')">
+                    Email is <strong>required</strong>
+                  </mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="_30width">
+                  <mat-label>Code</mat-label>
+                  <mat-select formControlName="code" required>
+                    <mat-option>--</mat-option>
+                    <mat-option *ngFor="let code of countryCodes" [value]="code.code">
+                      {{code.slug}}
+                    </mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="signUpForm.controls.code.hasError('required')">Please choose a country code
+                  </mat-error>
+                </mat-form-field>
+                <mat-form-field class="_70width">
+                  <mat-label>Phone Number</mat-label>
+                  <input matInput formControlName="phoneNumber" placeholder="Ex. +91-9876543210" autocomplete="off">
+                  <mat-error *ngIf="signUpForm.controls.phoneNumber.hasError('required')">
+                    Phone Number is <strong>required</strong>
+                  </mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="full-width-field M0">
+                  <mat-label>Password</mat-label>
+                  <input matInput formControlName="password" [type]="hide ? 'password' : 'text'"
+                    placeholder="Ex. Abcd@123" autocomplete="off">
+                  <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                    [attr.aria-pressed]="hide">
+                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                  </button>
+                  <mat-error *ngIf="signUpForm.controls.password.hasError('required')">
+                    Password is <strong>required</strong>
+                  </mat-error>
+                </mat-form-field>
+                <button [disabled]="!signUpForm.valid" mat-raised-button color="primary" class="full-width-field"
+                  type="submit">Sign Up</button>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="container-fluid" [ngStyle]="{'display': toggle ? 'block' : 'none'}">
+          <div class="row M0">
+            <div class="col-12">
+              <h1 class="signup1">SIGN IN</h1>
+              <form class="signin" [formGroup]="signInForm" (ngSubmit)="signIn()">
+                <mat-form-field class="full-width-field">
+                  <mat-label>Email</mat-label>
+                  <span class="material-icons" matSuffix>
+                    person_outline
+                  </span>
+                  <input matInput formControlName="email" placeholder="Ex. pat@example.com" autocomplete="off">
+                  <mat-error
+                    *ngIf="signInForm.controls.email.hasError('email') && !signInForm.controls.email.hasError('required')">
+                    Please enter a valid email address
+                  </mat-error>
+                  <mat-error *ngIf="signInForm.controls.email.hasError('required')">
+                    Email is <strong>required</strong>
+                  </mat-error>
+                </mat-form-field>
+                <mat-form-field class="full-width-field M0">
+                  <mat-label>Password</mat-label>
+                  <input matInput formControlName="password" [type]="hide ? 'password' : 'text'"
+                    placeholder="Ex. Abcd@123" autocomplete="off">
+                  <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                    [attr.aria-pressed]="hide">
+                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                  </button>
+                  <mat-error *ngIf="signInForm.controls.email.hasError('required')">
+                    Password is <strong>required</strong>
+                  </mat-error>
+                </mat-form-field>
+                <div>
+                  <a [routerLink]="['/forgot-password']" class="forgot-password MB15">Forgot Password?</a>
+                </div>
+                <button [disabled]="!signInForm.valid" mat-raised-button color="primary" class="full-width-field"
+                  type="submit">Sign In</button>
+
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

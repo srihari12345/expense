@@ -1,0 +1,61 @@
+<app-top-navigation></app-top-navigation>
+
+
+<div class="c2">
+  <div class="container-fluid">
+    <div class="row M0">
+      <div class="offset-3 col-6">
+        <div class="MTB15">
+
+          <div className="login-container">
+            <h2>Create Group</h2>
+
+            <form class="signup" [formGroup]="createGroupForm" (ngSubmit)='createGroup()'>
+
+
+              <div class="form-group">
+                <mat-form-field class="full-width-field MR4">
+
+                  <mat-label>Group Name</mat-label>
+                  <input matInput formControlName="group_name" type="text" placeholder="Enter Group Name"
+                    autocomplete="off" />
+                  <mat-error *ngIf="createGroupForm.controls.group_name.hasError('required')">
+                    Group Name is <strong>required</strong>
+                  </mat-error>
+                </mat-form-field>
+
+              </div>
+              <div class="form-group">
+                <mat-form-field class="full-width-field MR4">
+
+                  <mat-label class='description'>description</mat-label>
+
+                  <input matInput formControlName="description" type="text" placeholder="description" />
+                  <mat-error *ngIf="createGroupForm.controls.description.hasError('required')">
+                    Description <strong>required</strong>
+                  </mat-error>
+                </mat-form-field>
+
+              </div>
+              <div class="form-group" class="full-width-field MR4">
+
+                <mat-label>Users</mat-label>
+                <ng-multiselect-dropdown [placeholder]="'Select Users to Add'" [data]="allUsers"
+                  [settings]="dropdownSettings" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)"
+                  formControlName="group_users">
+                </ng-multiselect-dropdown>
+
+              </div>
+
+              <div class="flex-even">
+                <button type="button" mat-raised-button color="default" (click)="resetForm()">Cancel</button>
+                <button mat-raised-button color="primary" [disabled]="!createGroupForm.valid"
+                  type="submit">Create</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

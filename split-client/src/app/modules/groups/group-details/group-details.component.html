@@ -1,0 +1,83 @@
+<app-top-navigation></app-top-navigation>
+<div class="container MT50">
+  <div class="row">
+    <div class="col-12 text-center">
+      <h2>{{groupDetail?.group_name}}</h2>
+      <h4>{{groupDetail?.description}}</h4>
+    </div>
+    <div class="col-12">
+      <mat-tab-group mat-stretch-tabs class="example-stretched-tabs mat-elevation-z4">
+        <mat-tab label="Expenses">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-12">
+                <a (click)="redirectToCreateExpense()">
+                  <button mat-fab color="primary" class="float-right MTB15"><span class="material-icons">
+                      add
+                    </span></button></a>
+              </div>
+            </div>
+          </div>
+          <div class=container-fluid>
+            <div class="row clear-both">
+
+              <div class="col-md-4 col-lg-4 col-xl-4 MTB15" *ngFor="let item of expenseDetail, let i= index">
+                <div class="card">
+                  <div class="card-header">
+                    <h3 class="card-title">{{item.expenseName}}</h3>
+                    <button mat-mini-fab color="primary" (click)="redirectToUpdateExpense()"><span
+                        class="material-icons">
+                        open_in_new
+                      </span></button>
+                  </div>
+                  <div class="card-body">
+
+                    <div>
+                      <h5 class="card-text">amount : {{item.amount}}</h5>
+                      <h5 class="card-text">category : {{item.category[0].item_text}}</h5>
+                    </div>
+                  </div>
+                  <div class="card-footer">
+                    <div class="flex-even">
+                      <span>Created by: {{groupDetail?.group_creatorName}}</span>
+                      <button mat-mini-fab color="warn" class="float-right"
+                        (click)="deleteExpense(item.expenseId)"><span class="material-icons">
+                          delete_forever
+                        </span></button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </mat-tab>
+        <mat-tab label="Users">
+          <div class="row M0">
+            <div class="card col-3" *ngFor="let user of groupDetail?.group_users">
+              <div class="card-body">
+                <p>{{user.item_text}}</p>
+              </div>
+            </div>
+          </div>
+        </mat-tab>
+        <mat-tab label="Settle Expenses">
+          <div class=container-fluid>
+            <div class="row clear-both">
+              <div class="col-12">
+                <table>
+                  <tbody>
+                    <tr *ngFor="let val of settleExpenseTableData">
+                      <td>
+                        {{val.toPayToCreator}}
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </mat-tab>
+      </mat-tab-group>
+    </div>
+  </div>
+</div>
