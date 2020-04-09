@@ -23,7 +23,7 @@ app.use(routeLoggerMiddleware.logIp);
 app.use(globalErrorMiddleware.globalErrorHandler);
 
 
-app.use(express.static(path.join(__dirname, 'split-client/dist/split-expenses-client/index.html')));
+app.use(express.static(path.join(__dirname, '/public/')));
 
 
 
