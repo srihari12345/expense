@@ -1195,32 +1195,28 @@ class AuthenticateService {
         };
     }
     signup(req) {
-        return this._http.post(_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].BASE_URL + _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].API_VERSION + _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].APIS.SIGNUP, req).map(response => response);
+        return this._http.post(_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].API_VERSION + _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].APIS.SIGNUP, req).map(response => response);
     }
     signin(req) {
-        return this._http.post(_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].BASE_URL + _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].API_VERSION + _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].APIS.SIGNIN, req).map(response => response);
+        return this._http.post(_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].API_VERSION + _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].APIS.SIGNIN, req).map(response => response);
     }
     forgotPassword(req) {
         const params = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpParams"]().set("email", req.email);
-        return this._http.post(_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].BASE_URL +
-            _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].API_VERSION +
+        return this._http.post(_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].API_VERSION +
             _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].APIS.FORGOTPASSWORD, req).map(response => response);
     }
     updatePassword(req) {
         const params = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpParams"]()
             .set('validationToken', req.validationToken)
             .set('password', req.password);
-        return this._http.put(_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].BASE_URL +
-            _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].API_VERSION +
+        return this._http.put(_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].API_VERSION +
             _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].APIS.RESETPASSWORD, params).map(response => response);
     } //end updatePassword
     logout(userId, authToken) {
-        return this._http.post(`${_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].BASE_URL +
-            _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].API_VERSION}${userId}/logout?authToken=${authToken}`, {}).map(response => response);
+        return this._http.post(`${_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].API_VERSION}${userId}/logout?authToken=${authToken}`, {}).map(response => response);
     }
     getUsers(authToken) {
-        return this._http.get(`${_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].BASE_URL +
-            _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].API_VERSION}view/all?authToken=${authToken}`);
+        return this._http.get(`${_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].API_VERSION}view/all?authToken=${authToken}`);
     }
 }
 AuthenticateService.ɵfac = function AuthenticateService_Factory(t) { return new (t || AuthenticateService)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"])); };
@@ -1308,38 +1304,37 @@ class GroupsService {
     }
     deleteGroup(req) {
         return this._http
-            .post(_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].BASE_URL + _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].API_VERSION + _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].SUB_PATH.GROUP + req + "/" + _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].APIS.DELETE + "?authToken=" + this.authToken, {})
+            .post(_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].API_VERSION + _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].SUB_PATH.GROUP + req + "/" + _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].APIS.DELETE + "?authToken=" + this.authToken, {})
             .map(response => response);
     }
     groupDetails(req) {
         return this._http
-            .get(_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].BASE_URL + _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].API_VERSION + _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].SUB_PATH.GROUP + req + "/" + _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].APIS.DETAILS + "?authToken=" + this.authToken, {})
+            .get(_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].API_VERSION + _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].SUB_PATH.GROUP + req + "/" + _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].APIS.DETAILS + "?authToken=" + this.authToken, {})
             .map(response => response);
     }
     updateGroup(req) {
         return this._http
-            .post(_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].BASE_URL + _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].API_VERSION + _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].SUB_PATH.GROUP + req + "/" + _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].APIS.UPDATEGROUP + "?authToken=" + this.authToken, {})
+            .post(_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].API_VERSION + _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].SUB_PATH.GROUP + req + "/" + _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].APIS.UPDATEGROUP + "?authToken=" + this.authToken, {})
             .map(response => response);
     }
     createExpense(req) {
         return this._http
-            .post(`${_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].BASE_URL +
-            _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].API_VERSION}group/expense/createExpense?authToken=${this.authToken}`, req)
+            .post(`${_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].API_VERSION}group/expense/createExpense?authToken=${this.authToken}`, req)
             .map(response => response);
     }
     deleteExpense(req) {
         return this._http
-            .post(_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].BASE_URL + _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].API_VERSION + _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].SUB_PATH.EXPENSE + req + "/" + _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].APIS.DELETE + "?authToken=" + this.authToken, {})
+            .post(_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].API_VERSION + _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].SUB_PATH.EXPENSE + req + "/" + _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].APIS.DELETE + "?authToken=" + this.authToken, {})
             .map(response => response);
     }
     expenseDetails(req) {
         return this._http
-            .get(_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].BASE_URL + _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].API_VERSION + _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].SUB_PATH.GROUP + req + '/' + _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].SUB_PATH.EXPENSE + _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].APIS.LIST + "?authToken=" + this.authToken, {})
+            .get(_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].API_VERSION + _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].SUB_PATH.GROUP + req + '/' + _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].SUB_PATH.EXPENSE + _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].APIS.LIST + "?authToken=" + this.authToken, {})
             .map(response => response);
     }
     updateExpense(req) {
         return this._http
-            .get(_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].BASE_URL + _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].API_VERSION + _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].SUB_PATH.GROUP + req + '/' + _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].SUB_PATH.EXPENSE + _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].APIS.UPDATEEXPENSE + "?authToken=" + this.authToken, {})
+            .get(_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].API_VERSION + _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].SUB_PATH.GROUP + req + '/' + _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].SUB_PATH.EXPENSE + _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].APIS.UPDATEEXPENSE + "?authToken=" + this.authToken, {})
             .map(response => response);
     }
 }

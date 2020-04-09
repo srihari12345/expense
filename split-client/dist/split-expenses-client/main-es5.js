@@ -2289,14 +2289,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       _createClass(AuthenticateService, [{
         key: "signup",
         value: function signup(req) {
-          return this._http.post(_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].BASE_URL + _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].API_VERSION + _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].APIS.SIGNUP, req).map(function (response) {
+          return this._http.post(_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].API_VERSION + _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].APIS.SIGNUP, req).map(function (response) {
             return response;
           });
         }
       }, {
         key: "signin",
         value: function signin(req) {
-          return this._http.post(_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].BASE_URL + _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].API_VERSION + _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].APIS.SIGNIN, req).map(function (response) {
+          return this._http.post(_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].API_VERSION + _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].APIS.SIGNIN, req).map(function (response) {
             return response;
           });
         }
@@ -2304,7 +2304,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         key: "forgotPassword",
         value: function forgotPassword(req) {
           var params = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpParams"]().set("email", req.email);
-          return this._http.post(_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].BASE_URL + _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].API_VERSION + _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].APIS.FORGOTPASSWORD, req).map(function (response) {
+          return this._http.post(_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].API_VERSION + _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].APIS.FORGOTPASSWORD, req).map(function (response) {
             return response;
           });
         }
@@ -2312,7 +2312,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         key: "updatePassword",
         value: function updatePassword(req) {
           var params = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpParams"]().set('validationToken', req.validationToken).set('password', req.password);
-          return this._http.put(_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].BASE_URL + _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].API_VERSION + _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].APIS.RESETPASSWORD, params).map(function (response) {
+          return this._http.put(_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].API_VERSION + _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].APIS.RESETPASSWORD, params).map(function (response) {
             return response;
           });
         } //end updatePassword
@@ -2320,14 +2320,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "logout",
         value: function logout(userId, authToken) {
-          return this._http.post("".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].BASE_URL + _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].API_VERSION).concat(userId, "/logout?authToken=").concat(authToken), {}).map(function (response) {
+          return this._http.post("".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].API_VERSION).concat(userId, "/logout?authToken=").concat(authToken), {}).map(function (response) {
             return response;
           });
         }
       }, {
         key: "getUsers",
         value: function getUsers(authToken) {
-          return this._http.get("".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].BASE_URL + _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].API_VERSION, "view/all?authToken=").concat(authToken));
+          return this._http.get("".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].API_VERSION, "view/all?authToken=").concat(authToken));
         }
       }]);
 
@@ -2507,49 +2507,49 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "deleteGroup",
         value: function deleteGroup(req) {
-          return this._http.post(_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].BASE_URL + _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].API_VERSION + _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].SUB_PATH.GROUP + req + "/" + _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].APIS.DELETE + "?authToken=" + this.authToken, {}).map(function (response) {
+          return this._http.post(_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].API_VERSION + _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].SUB_PATH.GROUP + req + "/" + _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].APIS.DELETE + "?authToken=" + this.authToken, {}).map(function (response) {
             return response;
           });
         }
       }, {
         key: "groupDetails",
         value: function groupDetails(req) {
-          return this._http.get(_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].BASE_URL + _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].API_VERSION + _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].SUB_PATH.GROUP + req + "/" + _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].APIS.DETAILS + "?authToken=" + this.authToken, {}).map(function (response) {
+          return this._http.get(_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].API_VERSION + _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].SUB_PATH.GROUP + req + "/" + _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].APIS.DETAILS + "?authToken=" + this.authToken, {}).map(function (response) {
             return response;
           });
         }
       }, {
         key: "updateGroup",
         value: function updateGroup(req) {
-          return this._http.post(_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].BASE_URL + _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].API_VERSION + _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].SUB_PATH.GROUP + req + "/" + _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].APIS.UPDATEGROUP + "?authToken=" + this.authToken, {}).map(function (response) {
+          return this._http.post(_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].API_VERSION + _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].SUB_PATH.GROUP + req + "/" + _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].APIS.UPDATEGROUP + "?authToken=" + this.authToken, {}).map(function (response) {
             return response;
           });
         }
       }, {
         key: "createExpense",
         value: function createExpense(req) {
-          return this._http.post("".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].BASE_URL + _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].API_VERSION, "group/expense/createExpense?authToken=").concat(this.authToken), req).map(function (response) {
+          return this._http.post("".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].API_VERSION, "group/expense/createExpense?authToken=").concat(this.authToken), req).map(function (response) {
             return response;
           });
         }
       }, {
         key: "deleteExpense",
         value: function deleteExpense(req) {
-          return this._http.post(_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].BASE_URL + _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].API_VERSION + _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].SUB_PATH.EXPENSE + req + "/" + _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].APIS.DELETE + "?authToken=" + this.authToken, {}).map(function (response) {
+          return this._http.post(_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].API_VERSION + _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].SUB_PATH.EXPENSE + req + "/" + _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].APIS.DELETE + "?authToken=" + this.authToken, {}).map(function (response) {
             return response;
           });
         }
       }, {
         key: "expenseDetails",
         value: function expenseDetails(req) {
-          return this._http.get(_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].BASE_URL + _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].API_VERSION + _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].SUB_PATH.GROUP + req + '/' + _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].SUB_PATH.EXPENSE + _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].APIS.LIST + "?authToken=" + this.authToken, {}).map(function (response) {
+          return this._http.get(_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].API_VERSION + _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].SUB_PATH.GROUP + req + '/' + _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].SUB_PATH.EXPENSE + _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].APIS.LIST + "?authToken=" + this.authToken, {}).map(function (response) {
             return response;
           });
         }
       }, {
         key: "updateExpense",
         value: function updateExpense(req) {
-          return this._http.get(_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].BASE_URL + _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].API_VERSION + _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].SUB_PATH.GROUP + req + '/' + _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].SUB_PATH.EXPENSE + _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].APIS.UPDATEEXPENSE + "?authToken=" + this.authToken, {}).map(function (response) {
+          return this._http.get(_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].API_VERSION + _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].SUB_PATH.GROUP + req + '/' + _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].SUB_PATH.EXPENSE + _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].APIS.UPDATEEXPENSE + "?authToken=" + this.authToken, {}).map(function (response) {
             return response;
           });
         }

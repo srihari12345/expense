@@ -19,14 +19,14 @@ export class AuthenticateService {
     password: any;
   }) {
     return this._http.post(
-      environment.BASE_URL + environment.API_VERSION + environment.APIS.SIGNUP,
+       environment.API_VERSION + environment.APIS.SIGNUP,
       req
     ).map(response => response);
   }
 
   signin(req: any) {
     return this._http.post(
-      environment.BASE_URL + environment.API_VERSION + environment.APIS.SIGNIN,
+       environment.API_VERSION + environment.APIS.SIGNIN,
       req
     ).map(response => response);
   }
@@ -34,7 +34,7 @@ export class AuthenticateService {
   forgotPassword(req: { email: string }) {
     const params = new HttpParams().set("email", req.email);
     return this._http.post(
-      environment.BASE_URL +
+      
         environment.API_VERSION +
         environment.APIS.FORGOTPASSWORD,
       req
@@ -48,7 +48,7 @@ export class AuthenticateService {
       .set('password', req.password)
 
       return this._http.put(
-        environment.BASE_URL +
+        
           environment.API_VERSION +
           environment.APIS.RESETPASSWORD,
         params
@@ -58,7 +58,7 @@ export class AuthenticateService {
 
   logout(userId, authToken): Observable<any> {
     return this._http.post(
-      `${environment.BASE_URL +
+      `${
         environment.API_VERSION}${userId}/logout?authToken=${authToken}`,
       {}
     ).map(response => response);
@@ -91,7 +91,7 @@ export class AuthenticateService {
 
   public getUsers(authToken): Observable<any> {
     return this._http.get(
-      `${environment.BASE_URL +
+      `${
         environment.API_VERSION}view/all?authToken=${authToken}`
     );
   }

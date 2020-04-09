@@ -35,28 +35,28 @@ export class GroupsService {
 
   deleteGroup(req): Observable <any> {
     return this._http
-    .post(environment.BASE_URL + environment.API_VERSION + environment.SUB_PATH.GROUP + req + "/" + environment.APIS.DELETE + "?authToken="+this.authToken,
+    .post(environment.API_VERSION + environment.SUB_PATH.GROUP + req + "/" + environment.APIS.DELETE + "?authToken="+this.authToken,
     {})
     .map(response => response);
   }
 
   groupDetails(req): Observable <any> {
     return this._http
-    .get(environment.BASE_URL + environment.API_VERSION + environment.SUB_PATH.GROUP + req + "/" + environment.APIS.DETAILS + "?authToken="+this.authToken,
+    .get(environment.API_VERSION + environment.SUB_PATH.GROUP + req + "/" + environment.APIS.DETAILS + "?authToken="+this.authToken,
     {})
     .map(response => response);
   }
 
   updateGroup(req): Observable <any> {
     return this._http
-    .post(environment.BASE_URL + environment.API_VERSION + environment.SUB_PATH.GROUP + req + "/" + environment.APIS.UPDATEGROUP + "?authToken="+this.authToken,
+    .post(environment.API_VERSION + environment.SUB_PATH.GROUP + req + "/" + environment.APIS.UPDATEGROUP + "?authToken="+this.authToken,
     {})
     .map(response => response);
   }
   createExpense(req): Observable<any> {
     return this._http
       .post(
-        `${environment.BASE_URL +
+        `${
           environment.API_VERSION}group/expense/createExpense?authToken=${
           this.authToken
         }`,
@@ -68,21 +68,21 @@ export class GroupsService {
 
   deleteExpense(req): Observable <any> {
     return this._http
-    .post(environment.BASE_URL + environment.API_VERSION + environment.SUB_PATH.EXPENSE + req + "/" + environment.APIS.DELETE + "?authToken="+this.authToken,
+    .post(environment.API_VERSION + environment.SUB_PATH.EXPENSE + req + "/" + environment.APIS.DELETE + "?authToken="+this.authToken,
     {})
     .map(response => response);
   }
 
   expenseDetails(req): Observable <any> {
     return this._http
-    .get(environment.BASE_URL + environment.API_VERSION + environment.SUB_PATH.GROUP + req +'/'+ environment.SUB_PATH.EXPENSE + environment.APIS.LIST + "?authToken="+this.authToken,
+    .get(environment.API_VERSION + environment.SUB_PATH.GROUP + req +'/'+ environment.SUB_PATH.EXPENSE + environment.APIS.LIST + "?authToken="+this.authToken,
     {})
     .map(response => response);
   }
 
   updateExpense(req): Observable <any> {
     return this._http
-    .get(environment.BASE_URL + environment.API_VERSION + environment.SUB_PATH.GROUP + req +'/'+ environment.SUB_PATH.EXPENSE + environment.APIS.UPDATEEXPENSE + "?authToken="+this.authToken,
+    .get(environment.API_VERSION + environment.SUB_PATH.GROUP + req +'/'+ environment.SUB_PATH.EXPENSE + environment.APIS.UPDATEEXPENSE + "?authToken="+this.authToken,
     {})
     .map(response => response);
   }
