@@ -4,16 +4,14 @@
   "description": "backend for bill split app",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node app"
   },
   "author": "srihari <sriharimn28@gmail.com>",
   "license": "ISC",
-  "engines":{
-    "node":"13.9.0"
-
+  "engines": {
+    "node": "13.9.0"
   },
   "dependencies": {
-    
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "cookie": "^0.4.0",
@@ -34,5 +32,8 @@
     "shortid": "^2.2.15",
     "socket.io": "^2.3.0",
     "socketio": "^1.0.0"
+  },
+  "devDependencies": {
+    "@angular/cli": "~9.0.4"
   }
 }
