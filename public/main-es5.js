@@ -135,10 +135,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     var routes = [{
       path: '',
-      redirectTo: '/',
+      redirectTo: 'authenticate',
       pathMatch: 'full'
     }, {
-      path: '/',
+      path: 'authenticate',
       component: _authentication_login_login_component__WEBPACK_IMPORTED_MODULE_2__["LoginComponent"]
     }, {
       path: 'forgot-password',

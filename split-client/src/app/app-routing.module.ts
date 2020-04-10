@@ -19,11 +19,11 @@ import { UpdateExpenseComponent } from './modules/expenses/update-expense/update
 const routes: Routes = [
   { 
     path: '',
-    redirectTo: '/', 
+    redirectTo: 'authenticate', 
     pathMatch: 'full'
   },
   {
-    path: '/',
+    path: 'authenticate',
     component: LoginComponent
   },
 
