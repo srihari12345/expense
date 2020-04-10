@@ -6,7 +6,7 @@ import { Router } from "@angular/router";
 import { GroupsService } from "src/app/helpers/services/groups/groups.service";
 import { IDropdownSettings } from "ng-multiselect-dropdown";
 import { element } from "protractor";
-
+import { SocketService } from "src/app/helpers/services/socket/socket.service";
 @Component({
   selector: "app-create-group",
   templateUrl: "./create-group.component.html",
@@ -29,7 +29,8 @@ export class CreateGroupComponent implements OnInit {
     private toastr: ToastrService,
     private fb: FormBuilder,
     private _router: Router,
-    private _authenticate: AuthenticateService
+    private _authenticate: AuthenticateService,
+    private _socket: SocketService
   ) {}
 
   ngOnInit(): void {
@@ -114,7 +115,6 @@ export class CreateGroupComponent implements OnInit {
 
   createGroup = () => {
     console.log("in this call");
-    this.createGroupForm.value.group_users.push({item_id: this.userId.userId, item_text: this.userId.firstName + " " + this.userId.lastName})
     this.createGroupForm.patchValue({
       group_creatorName: this.userId.firstName + " " + this.userId.lastName,
       group_creatorId: this.userId.userId,
@@ -125,12 +125,13 @@ export class CreateGroupComponent implements OnInit {
       (response: any) => {
         console.log(response);
         if (response.status == 200 && response.data) {
-          setTimeout(() => {
             this.createGroupForm.reset();
+            let userIds= [];
+            response.data.group_users.forEach(element => {
+              userIds.push(element.item_id);
+            });
+            this._socket.sendSocketNotifs('create-group-notification', {group_name: response.data.group_name, group_users: userIds, groupId: response.data.groupId});
             this._router.navigateByUrl("/groups");
-          }, 1000);
-          this.getMyGroups();
-          this.getUsersGroup();
         }
         if (response.status == 500 && response.error == true) {
           this.createGroupForm.reset();

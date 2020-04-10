@@ -4,12 +4,12 @@ import { LoginComponent } from './authentication/login/login.component';
 import { ForgotPasswordComponent } from './authentication/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './authentication/reset-password/reset-password/reset-password.component';
 import { GroupsComponent } from './modules/groups/groups/groups.component';
-import { MyProfileComponent } from './modules/my profile/my-profile/my-profile.component';
+
 import { NotificationsComponent } from './modules/notifications/notifications/notifications/notifications.component';
 import { AuthGuard } from './helpers/guards/auth.guard';
 import { PageNotFoundComponent } from './page-not-found/page-not-found/page-not-found.component';
 import { CreateGroupComponent } from './modules/groups/create-group/create-group.component'
-import { UpdateGroupComponent } from './modules/groups/update-group/update-group.component';
+
 import { GroupDetailsComponent } from './modules/groups/group-details/group-details.component'
 import { AddExpenseComponent } from './modules/expenses/add-expense/add-expense.component';
 import { UpdateExpenseComponent } from './modules/expenses/update-expense/update-expense.component';
@@ -51,11 +51,6 @@ const routes: Routes = [
   canActivate:[AuthGuard]
 },
 {
-  path:'groups/updateGroup',
-  component:UpdateGroupComponent,
-  canActivate:[AuthGuard]
-},
-{
   path:'groups/expense/create-expense/:groupId',
   component:AddExpenseComponent,
   canActivate:[AuthGuard]
@@ -63,11 +58,6 @@ const routes: Routes = [
 {
   path:'groups/expense/update-expense/:expenseId',
   component:UpdateExpenseComponent,
-  canActivate:[AuthGuard]
-},
-{
-  path:'my-profile',
-  component:MyProfileComponent,
   canActivate:[AuthGuard]
 },
 {

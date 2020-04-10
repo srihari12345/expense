@@ -5,6 +5,7 @@ import { Router } from "@angular/router";
 import { SocketService } from "../../../../helpers/services/socket/socket.service";
 import { CommunicationService } from "src/app/helpers/services/core/communication.service";
 import { AuthenticateService } from "../../../../../app/helpers/services/authentication/authenticate.service";
+import { NotificationsService } from 'src/app/helpers/services/notifications/notifications.service';
 
 @Component({
   selector: "app-top-navigation",
@@ -27,7 +28,8 @@ export class TopNavigationComponent implements OnInit {
     private _auth: AuthenticateService,
     private router: Router,
     private toastr: ToastrService,
-    private socket: SocketService
+    private socket: SocketService,
+    private _notification: NotificationsService
   ) {
     this._comm.changeEmitted.subscribe(resp => {
       console.log(resp);
@@ -53,13 +55,22 @@ export class TopNavigationComponent implements OnInit {
     this.socket.setUser(this.fetchToken);
     this.socket.receiveSocketNotification().subscribe(resp => {
       this.notificationCount = 0;
-      console.log("socket resposne received",resp); 
-      resp.forEach(element => {
-        if(element.item_id == this.userId){
-          console.log("this is the user who receives notification",element);
-          this.notificationCount++;
-        }
-      });
+      this.getNotificationById();
+      // console.log("socket resposne received",resp);
+      // if(resp.message == 'Notifications Found' && resp.status == 200 && resp.data.length > 0){
+      //   resp.data.forEach(element => {
+      //     if(element.user.id == this.userId){
+      //       this.notificationCount++;
+      //     }
+      //   });
+      // }else{
+      //   resp.forEach(element => {
+      //     if(element.item_id == this.userId){
+      //       console.log("this is the user who receives notification",element);
+      //       this.notificationCount++;
+      //     }
+      //   });
+      // }
     })
     console.log("notification count", this.notificationCount);
   }
@@ -82,15 +93,37 @@ export class TopNavigationComponent implements OnInit {
     this.activeDashBoard = this.active;
     this.socket.receiveSocketNotification().subscribe(resp => {
       this.notificationCount = 0;
-      console.log("socket resposne received",resp);
-      resp.forEach(element => {
-        if(element.item_id == this.userId){
-          console.log("this is the user who receives notification",element);
-          this.notificationCount++;
-        }
-      });
+      this.getNotificationById();
+      // console.log("socket resposne received",resp);
+      // if(resp.message == 'Notifications Found' && resp.status == 200 && resp.data.length > 0){
+      //   resp.data.forEach(element => {
+      //     if(element.user.id == this.userId){
+      //       this.notificationCount++;
+      //     }
+      //   });
+      // }else{
+      //   resp.forEach(element => {
+      //     if(element.item_id == this.userId){
+      //       console.log("this is the user who receives notification",element);
+      //       this.notificationCount++;
+      //     }
+      //   });
+      // }
     })
+    this.notificationCount = 0;
+      this.getNotificationById();
     console.log("notification count", this.notificationCount);
+  }
+  getNotificationById = () => {
+    this._notification.fetchNotificationById(this.userId).subscribe(resp => {
+      if(resp.message == 'Notifications Found' && resp.status == 200 && resp.data.length > 0){
+        resp.data.forEach(element => {
+          if(!element.isSeen){
+            this.notificationCount++;
+          }
+        });
+      }
+    })
   }
 
   public logoutFunction = () => {
