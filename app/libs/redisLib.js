@@ -1,7 +1,7 @@
 //redis lib
 const check = require("./checkLib.js");
-const redis = require('redis').createredis(process.env.REDIS_URL);;
-
+const redis = require('redis').createClient(process.env.REDIS_URL);;
+let client = redis.createClient();
 
 redis.on('connect', () => {
 
@@ -69,4 +69,3 @@ module.exports = {
     setANewOnlineUserInHash:setANewOnlineUserInHash,
     deleteUserFromHash:deleteUserFromHash
 }
-
