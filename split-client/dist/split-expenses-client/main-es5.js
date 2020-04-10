@@ -414,6 +414,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     var _helpers_services_socket_socket_service__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(
     /*! ./helpers/services/socket/socket.service */
     "./src/app/helpers/services/socket/socket.service.ts");
+    /* harmony import */
+
+
+    var _helpers_services_notifications_notifications_service__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(
+    /*! ./helpers/services/notifications/notifications.service */
+    "./src/app/helpers/services/notifications/notifications.service.ts");
 
     var AppModule = function AppModule() {
       _classCallCheck(this, AppModule);
@@ -427,7 +433,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       factory: function AppModule_Factory(t) {
         return new (t || AppModule)();
       },
-      providers: [_app_routing_module__WEBPACK_IMPORTED_MODULE_3__["AppRoutingModule"], _helpers_services_authentication_authenticate_service__WEBPACK_IMPORTED_MODULE_8__["AuthenticateService"], src_app_helpers_services_core_communication_service__WEBPACK_IMPORTED_MODULE_9__["CommunicationService"], _helpers_services_groups_groups_service__WEBPACK_IMPORTED_MODULE_11__["GroupsService"], _helpers_services_socket_socket_service__WEBPACK_IMPORTED_MODULE_14__["SocketService"]],
+      providers: [_app_routing_module__WEBPACK_IMPORTED_MODULE_3__["AppRoutingModule"], _helpers_services_authentication_authenticate_service__WEBPACK_IMPORTED_MODULE_8__["AuthenticateService"], _helpers_services_notifications_notifications_service__WEBPACK_IMPORTED_MODULE_15__["NotificationsService"], src_app_helpers_services_core_communication_service__WEBPACK_IMPORTED_MODULE_9__["CommunicationService"], _helpers_services_groups_groups_service__WEBPACK_IMPORTED_MODULE_11__["GroupsService"], _helpers_services_socket_socket_service__WEBPACK_IMPORTED_MODULE_14__["SocketService"]],
       imports: [[_angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"], _app_routing_module__WEBPACK_IMPORTED_MODULE_3__["AppRoutingModule"], _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_5__["BrowserAnimationsModule"], _authentication_authentication_module__WEBPACK_IMPORTED_MODULE_7__["AuthenticationModule"], _modules_shared_shared_module__WEBPACK_IMPORTED_MODULE_6__["SharedModule"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterModule"], ng_multiselect_dropdown__WEBPACK_IMPORTED_MODULE_12__["NgMultiSelectDropDownModule"].forRoot(), _modules_groups_module__WEBPACK_IMPORTED_MODULE_13__["GroupsModule"]]]
     });
 
@@ -446,7 +452,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         args: [{
           declarations: [_app_component__WEBPACK_IMPORTED_MODULE_4__["AppComponent"], _page_not_found_page_not_found_page_not_found_component__WEBPACK_IMPORTED_MODULE_10__["PageNotFoundComponent"]],
           imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"], _app_routing_module__WEBPACK_IMPORTED_MODULE_3__["AppRoutingModule"], _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_5__["BrowserAnimationsModule"], _authentication_authentication_module__WEBPACK_IMPORTED_MODULE_7__["AuthenticationModule"], _modules_shared_shared_module__WEBPACK_IMPORTED_MODULE_6__["SharedModule"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterModule"], ng_multiselect_dropdown__WEBPACK_IMPORTED_MODULE_12__["NgMultiSelectDropDownModule"].forRoot(), _modules_groups_module__WEBPACK_IMPORTED_MODULE_13__["GroupsModule"]],
-          providers: [_app_routing_module__WEBPACK_IMPORTED_MODULE_3__["AppRoutingModule"], _helpers_services_authentication_authenticate_service__WEBPACK_IMPORTED_MODULE_8__["AuthenticateService"], src_app_helpers_services_core_communication_service__WEBPACK_IMPORTED_MODULE_9__["CommunicationService"], _helpers_services_groups_groups_service__WEBPACK_IMPORTED_MODULE_11__["GroupsService"], _helpers_services_socket_socket_service__WEBPACK_IMPORTED_MODULE_14__["SocketService"]],
+          providers: [_app_routing_module__WEBPACK_IMPORTED_MODULE_3__["AppRoutingModule"], _helpers_services_authentication_authenticate_service__WEBPACK_IMPORTED_MODULE_8__["AuthenticateService"], _helpers_services_notifications_notifications_service__WEBPACK_IMPORTED_MODULE_15__["NotificationsService"], src_app_helpers_services_core_communication_service__WEBPACK_IMPORTED_MODULE_9__["CommunicationService"], _helpers_services_groups_groups_service__WEBPACK_IMPORTED_MODULE_11__["GroupsService"], _helpers_services_socket_socket_service__WEBPACK_IMPORTED_MODULE_14__["SocketService"]],
           bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_4__["AppComponent"]]
         }]
       }], null, null);
@@ -2588,6 +2594,114 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   },
 
   /***/
+  "./src/app/helpers/services/notifications/notifications.service.ts":
+  /*!*************************************************************************!*\
+    !*** ./src/app/helpers/services/notifications/notifications.service.ts ***!
+    \*************************************************************************/
+
+  /*! exports provided: NotificationsService */
+
+  /***/
+  function srcAppHelpersServicesNotificationsNotificationsServiceTs(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony export (binding) */
+
+
+    __webpack_require__.d(__webpack_exports__, "NotificationsService", function () {
+      return NotificationsService;
+    });
+    /* harmony import */
+
+
+    var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+    /*! @angular/core */
+    "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+    /* harmony import */
+
+
+    var _environments_environment__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    /*! ../../../../environments/environment */
+    "./src/environments/environment.ts");
+    /* harmony import */
+
+
+    var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    /*! @angular/common/http */
+    "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/http.js");
+    /* harmony import */
+
+
+    var _authentication_authenticate_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    /*! ../authentication/authenticate.service */
+    "./src/app/helpers/services/authentication/authenticate.service.ts");
+
+    var NotificationsService =
+    /*#__PURE__*/
+    function () {
+      function NotificationsService(_http, _auth) {
+        _classCallCheck(this, NotificationsService);
+
+        this._http = _http;
+        this._auth = _auth;
+        this.authToken = this._auth.getUserAuth();
+        this.userId = this._auth.getUserInfoFromLocalStorage();
+        this.firstName = this._auth.getUserInfoFromLocalStorage();
+      }
+
+      _createClass(NotificationsService, [{
+        key: "fetchNotificationById",
+        value: function fetchNotificationById(req) {
+          return this._http.get(_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].BASE_URL + _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].API_VERSION + req + "/" + _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].APIS.NOTIFICATIONS + "?authToken=" + this.authToken, {}).map(function (response) {
+            return response;
+          });
+        }
+      }, {
+        key: "updateNotification",
+        value: function updateNotification(id) {
+          var req = {};
+          req['isSeen'] = true;
+          req['notifyId'] = id;
+          return this._http.put(_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].BASE_URL + _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].API_VERSION + id + "/" + _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].APIS.NOTIFICATIONS + "/" + _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].APIS.UPDATE + "?authToken=" + this.authToken, req).map(function (response) {
+            return response;
+          });
+        }
+      }]);
+
+      return NotificationsService;
+    }();
+
+    NotificationsService.ɵfac = function NotificationsService_Factory(t) {
+      return new (t || NotificationsService)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](_authentication_authenticate_service__WEBPACK_IMPORTED_MODULE_3__["AuthenticateService"]));
+    };
+
+    NotificationsService.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInjectable"]({
+      token: NotificationsService,
+      factory: NotificationsService.ɵfac,
+      providedIn: "root"
+    });
+    /*@__PURE__*/
+
+    (function () {
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](NotificationsService, [{
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"],
+        args: [{
+          providedIn: "root"
+        }]
+      }], function () {
+        return [{
+          type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"]
+        }, {
+          type: _authentication_authenticate_service__WEBPACK_IMPORTED_MODULE_3__["AuthenticateService"]
+        }];
+      }, null);
+    })();
+    /***/
+
+  },
+
+  /***/
   "./src/app/helpers/services/socket/socket.service.ts":
   /*!***********************************************************!*\
     !*** ./src/app/helpers/services/socket/socket.service.ts ***!
@@ -2725,6 +2839,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         console.log("send notification", data);
 
         _this6.socket.emit('send-notification', data);
+      };
+
+      this.sendSocketNotifs = function (socketname, data) {
+        _this6.socket.emit(socketname, data);
       };
 
       console.log("SocketService is called");
@@ -6424,7 +6542,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         CREATEEXPENSE: 'createExpense',
         UPDATEEXPENSE: 'updateExpense',
         EXPENSE_DETAILS: 'details',
-        LIST: 'list'
+        LIST: 'list',
+        NOTIFICATIONS: 'notifications',
+        UPDATE: 'update'
       }
     };
     /*

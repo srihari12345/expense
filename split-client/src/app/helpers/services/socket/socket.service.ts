@@ -97,6 +97,10 @@ public sendSocketNotification = (data) => {
   this.socket.emit('send-notification', data);
 }
 
+public sendSocketNotifs = (socketname, data) => {
+  this.socket.emit(socketname,data);
+}
+
 } 
 
 

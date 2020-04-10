@@ -23,7 +23,9 @@ export const environment = {
     CREATEEXPENSE:'createExpense',
     UPDATEEXPENSE:'updateExpense',
     EXPENSE_DETAILS:'details',
-    LIST: 'list'
+    LIST: 'list',
+    NOTIFICATIONS: 'notifications',
+    UPDATE: 'update'
     
   }
 };

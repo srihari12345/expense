@@ -1,0 +1,16 @@
+this the expense split project don in angular node express and database mongodb
+
+https://github.com/srihari12345/expense   git repo link
+
+
+https://fierce-stream-20585.herokuapp.com/     deployed application url
+
+deployed in herokuapp
+
+it has sign up page login and forgot password page which works good bug in reset password cant access
+can create group add group and added user cant exit group and in group delete update works and 
+can create expense and settle and are bugs too in the application and notification shows and intuavtieness 
+angular with icons and responsiveness also  
+
+
+backebnd api is written also with documentation 

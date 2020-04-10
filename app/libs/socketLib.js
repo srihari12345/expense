@@ -12,7 +12,7 @@ const tokenLib = require("./tokenLib.js");
 const check = require("./checkLib.js");
 const response = require('./responseLib')
 //const ChatModel = mongoose.model('Chat');
-
+const notificationModel = require('../models/notification');
 const redisLib = require("./redisLib.js");
 
 
@@ -134,6 +134,30 @@ let setServer = (server) => {
         socket.on('send-notification', data => {
             console.log('this is socket data',data);
             myIo.emit('receive-notification',data);
+        })
+        
+        socket.on('create-group-notification',data => {
+            console.log(data);
+            notificationModel.find({
+                'user.id': { $in : data.group_users } 
+            })
+            .select()
+            .lean()
+            .exec((err, notifDetails) => {
+                console.log(err,notifDetails);
+                if (err) {
+                    console.log(err)
+                    logger.error(err.message, 'Notifications Socket function to create group', 10)
+                    let apiResponse = response.generate(true, 'Failed To Find Notifications', 500, null)
+                    res.send(apiResponse)
+                } else if (check.isEmpty(notifDetails)) {
+                    logger.info('No Notifications Found', 'Notifications Socket function to create group')
+                    let apiResponse = response.generate(true, 'No Notifications Found', 404, null)
+                } else {
+                    let apiResponse = response.generate(false, 'Notifications Found', 200, notifDetails)
+                    myIo.emit('receive-notification',apiResponse);
+                }
+            })
         })
     });
 }

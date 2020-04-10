@@ -19,6 +19,7 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { GroupsModule } from "./modules/groups.module";
 import { HttpClient } from '@angular/common/http';
 import { SocketService } from './helpers/services/socket/socket.service';
+import { NotificationsService } from './helpers/services/notifications/notifications.service';
 
 
 @NgModule({
@@ -41,7 +42,7 @@ import { SocketService } from './helpers/services/socket/socket.service';
     GroupsModule,
     
   ],
-  providers: [AppRoutingModule,AuthenticateService,CommunicationService,GroupsService,SocketService],
+  providers: [AppRoutingModule,AuthenticateService,NotificationsService,CommunicationService,GroupsService,SocketService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

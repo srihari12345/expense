@@ -3,7 +3,7 @@ const router = express.Router();
 const userController = require("../controllers/user_controller");
 const groupController = require("../controllers/group_controller");
 const expenseController = require("../controllers/expense_controller")
-
+const notificationsController = require("../controllers/notification_controller");
 const appConfig = require("../../appConfig/appConfig")
 const auth = require('../middlewares/auth')
 
@@ -40,4 +40,6 @@ module.exports.setRouter = (app) => {
     app.put(`${baseUrl}/group/:expenseId/expense/updateExpense`,auth.isAuthorized,expenseController.updateExpenseFunction);
     app.post(`${baseUrl}/expense/:expenseId/delete`,auth.isAuthorized,expenseController.deleteExpenseFunction);
 
+    app.get(`${baseUrl}/:userId/notifications`,auth.isAuthorized, notificationsController.getNotificationsById);
+    app.put(`${baseUrl}/:notifId/notifications/update`,auth.isAuthorized,notificationsController.updateNotification);
 }

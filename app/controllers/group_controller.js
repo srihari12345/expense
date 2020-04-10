@@ -138,34 +138,38 @@ let addGroupFunction = (req, res) => {
         })
     } // end addGroup function
 
-    let notification = () => {
-
+    let notification = (req) => {
         return new Promise((resolve, reject) => {
-
-            let newNotification = new NotificationModel({
-
-                notifyId: shortid.generate(),
-                notificationtext: addGroup.newGroupObj.group_name+"Group is created and you are added to this group",
-                user: req.body.user,
-                createdon: time.now(),
-                updatedon: time.now(),
-                isSeen: false
-
-            })
-
-            console.log(newNotification)
-            newNotification.save((err, newNotification) => {
-                if (err) {
-                    console.log(err)
-                    logger.error(err.message, 'groupController: addGroup', 10)
-                    let apiResponse = response.generate(true, 'Failed to add new group notify', 500, null)
-                    reject(apiResponse)
-                } else {
-                    let newNotificationObj = newNotification.toObject();
-                    resolve(newNotificationObj)
-                }
-
-            })
+            console.log("thid ud nofdhg", req);
+            let count = 0;
+            for(var i=0; i<req.group_users.length; i++){
+                let newNotification = new NotificationModel({
+                    notifyId: shortid.generate(),
+                    notificationText: req.group_name + " group is created and you are added to this group",
+                    user: {id: req.group_users[i].item_id, name: req.group_users[i].item_text},
+                    createdon: time.now(),
+                    updatedon: time.now(),
+                    isSeen: false
+                })
+                newNotification.save((err, newNotification) => {
+                    if (err) {
+                        count++;
+                        console.log(err)
+                        logger.error(err.message, 'groupController: addGroup', 10)
+                        let apiResponse = response.generate(true, 'Failed to add new group notify', 500, null)
+                        //reject(apiResponse)
+                    } else {
+                        let newNotificationObj = newNotification.toObject();
+                        //resolve(req)
+                    }
+    
+                })
+            };
+            if(count == 0) {
+                resolve(req);
+            }else if (count > 0){
+                reject("unable to create notification");
+            }
         })
     }
 
@@ -173,8 +177,8 @@ let addGroupFunction = (req, res) => {
 
 
     validateUserInput(req, res)
-    .then(addGroup)
-    .then(notification)
+        .then(addGroup)
+        .then(notification)
 
 
         .then((resolve) => {
@@ -337,12 +341,48 @@ let deleteGroupFunction = (req, res) => {
         })
     } // end deleteGroup function
 
+    let notification = () => {
+        return new Promise((resolve, reject) => {
+            console.log("thid ud nofdhg", req.body);
+            let count = 0;
+            for(var i=0; i< req.body.group_users.length; i++){
+                let newNotification = new NotificationModel({
+                    notifyId: shortid.generate(),
+                    notificationText: req.body.group_name + " group is deleted",
+                    user: {id: req.body.group_users[i].item_id, name: req.body.group_users[i].item_text},
+                    createdon: time.now(),
+                    updatedon: time.now(),
+                    isSeen: false
+                })
+                newNotification.save((err, newNotification) => {
+                    if (err) {
+                        count++;
+                        console.log(err)
+                        logger.error(err.message, 'groupController: deleteGroupFunction', 10)
+                        let apiResponse = response.generate(true, 'Failed to delete new group notify', 500, null)
+                        //reject(apiResponse)
+                    } else {
+                        let newNotificationObj = newNotification.toObject();
+                        //resolve(req)
+                    }
+    
+                })
+            };
+            if(count == 0) {
+                resolve(req);
+            }else if (count > 0){
+                reject("unable to create notification");
+            }
+        })
+    }
+
 
     findGroupDetails(req, res)
         .then(deleteGroup)
+        .then(notification)
         .then((resolve) => {
             //let apiResponse = response.generate(false, 'Deleted the Group successfully', 200, resolve)
-            res.send(resolve)
+            res.send(resolve.body)
         })
         .catch((err) => {
             console.log(err);

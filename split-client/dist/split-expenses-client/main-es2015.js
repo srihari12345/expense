@@ -210,6 +210,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var ng_multiselect_dropdown__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ng-multiselect-dropdown */ "./node_modules/ng-multiselect-dropdown/__ivy_ngcc__/fesm2015/ng-multiselect-dropdown.js");
 /* harmony import */ var _modules_groups_module__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./modules/groups.module */ "./src/app/modules/groups.module.ts");
 /* harmony import */ var _helpers_services_socket_socket_service__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./helpers/services/socket/socket.service */ "./src/app/helpers/services/socket/socket.service.ts");
+/* harmony import */ var _helpers_services_notifications_notifications_service__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./helpers/services/notifications/notifications.service */ "./src/app/helpers/services/notifications/notifications.service.ts");
+
 
 
 
@@ -230,7 +232,7 @@ __webpack_require__.r(__webpack_exports__);
 class AppModule {
 }
 AppModule.ɵmod = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineNgModule"]({ type: AppModule, bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_4__["AppComponent"]] });
-AppModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineInjector"]({ factory: function AppModule_Factory(t) { return new (t || AppModule)(); }, providers: [_app_routing_module__WEBPACK_IMPORTED_MODULE_3__["AppRoutingModule"], _helpers_services_authentication_authenticate_service__WEBPACK_IMPORTED_MODULE_8__["AuthenticateService"], src_app_helpers_services_core_communication_service__WEBPACK_IMPORTED_MODULE_9__["CommunicationService"], _helpers_services_groups_groups_service__WEBPACK_IMPORTED_MODULE_11__["GroupsService"], _helpers_services_socket_socket_service__WEBPACK_IMPORTED_MODULE_14__["SocketService"]], imports: [[
+AppModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineInjector"]({ factory: function AppModule_Factory(t) { return new (t || AppModule)(); }, providers: [_app_routing_module__WEBPACK_IMPORTED_MODULE_3__["AppRoutingModule"], _helpers_services_authentication_authenticate_service__WEBPACK_IMPORTED_MODULE_8__["AuthenticateService"], _helpers_services_notifications_notifications_service__WEBPACK_IMPORTED_MODULE_15__["NotificationsService"], src_app_helpers_services_core_communication_service__WEBPACK_IMPORTED_MODULE_9__["CommunicationService"], _helpers_services_groups_groups_service__WEBPACK_IMPORTED_MODULE_11__["GroupsService"], _helpers_services_socket_socket_service__WEBPACK_IMPORTED_MODULE_14__["SocketService"]], imports: [[
             _angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"],
             _app_routing_module__WEBPACK_IMPORTED_MODULE_3__["AppRoutingModule"],
             _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_5__["BrowserAnimationsModule"],
@@ -264,7 +266,7 @@ AppModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineInjector
                     ng_multiselect_dropdown__WEBPACK_IMPORTED_MODULE_12__["NgMultiSelectDropDownModule"].forRoot(),
                     _modules_groups_module__WEBPACK_IMPORTED_MODULE_13__["GroupsModule"],
                 ],
-                providers: [_app_routing_module__WEBPACK_IMPORTED_MODULE_3__["AppRoutingModule"], _helpers_services_authentication_authenticate_service__WEBPACK_IMPORTED_MODULE_8__["AuthenticateService"], src_app_helpers_services_core_communication_service__WEBPACK_IMPORTED_MODULE_9__["CommunicationService"], _helpers_services_groups_groups_service__WEBPACK_IMPORTED_MODULE_11__["GroupsService"], _helpers_services_socket_socket_service__WEBPACK_IMPORTED_MODULE_14__["SocketService"]],
+                providers: [_app_routing_module__WEBPACK_IMPORTED_MODULE_3__["AppRoutingModule"], _helpers_services_authentication_authenticate_service__WEBPACK_IMPORTED_MODULE_8__["AuthenticateService"], _helpers_services_notifications_notifications_service__WEBPACK_IMPORTED_MODULE_15__["NotificationsService"], src_app_helpers_services_core_communication_service__WEBPACK_IMPORTED_MODULE_9__["CommunicationService"], _helpers_services_groups_groups_service__WEBPACK_IMPORTED_MODULE_11__["GroupsService"], _helpers_services_socket_socket_service__WEBPACK_IMPORTED_MODULE_14__["SocketService"]],
                 bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_4__["AppComponent"]]
             }]
     }], null, null); })();
@@ -1350,6 +1352,59 @@ GroupsService.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInj
 
 /***/ }),
 
+/***/ "./src/app/helpers/services/notifications/notifications.service.ts":
+/*!*************************************************************************!*\
+  !*** ./src/app/helpers/services/notifications/notifications.service.ts ***!
+  \*************************************************************************/
+/*! exports provided: NotificationsService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NotificationsService", function() { return NotificationsService; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../environments/environment */ "./src/environments/environment.ts");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/http.js");
+/* harmony import */ var _authentication_authenticate_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../authentication/authenticate.service */ "./src/app/helpers/services/authentication/authenticate.service.ts");
+
+
+
+
+
+class NotificationsService {
+    constructor(_http, _auth) {
+        this._http = _http;
+        this._auth = _auth;
+        this.authToken = this._auth.getUserAuth();
+        this.userId = this._auth.getUserInfoFromLocalStorage();
+        this.firstName = this._auth.getUserInfoFromLocalStorage();
+    }
+    fetchNotificationById(req) {
+        return this._http
+            .get(_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].BASE_URL + _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].API_VERSION + req + "/" + _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].APIS.NOTIFICATIONS + "?authToken=" + this.authToken, {})
+            .map(response => response);
+    }
+    updateNotification(id) {
+        let req = {};
+        req['isSeen'] = true;
+        req['notifyId'] = id;
+        return this._http
+            .put(_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].BASE_URL + _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].API_VERSION + id + "/" + _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].APIS.NOTIFICATIONS + "/" + _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].APIS.UPDATE + "?authToken=" + this.authToken, req)
+            .map(response => response);
+    }
+}
+NotificationsService.ɵfac = function NotificationsService_Factory(t) { return new (t || NotificationsService)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](_authentication_authenticate_service__WEBPACK_IMPORTED_MODULE_3__["AuthenticateService"])); };
+NotificationsService.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInjectable"]({ token: NotificationsService, factory: NotificationsService.ɵfac, providedIn: "root" });
+/*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](NotificationsService, [{
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"],
+        args: [{
+                providedIn: "root"
+            }]
+    }], function () { return [{ type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"] }, { type: _authentication_authenticate_service__WEBPACK_IMPORTED_MODULE_3__["AuthenticateService"] }]; }, null); })();
+
+
+/***/ }),
+
 /***/ "./src/app/helpers/services/socket/socket.service.ts":
 /*!***********************************************************!*\
   !*** ./src/app/helpers/services/socket/socket.service.ts ***!
@@ -1438,6 +1493,9 @@ class SocketService {
         this.sendSocketNotification = (data) => {
             console.log("send notification", data);
             this.socket.emit('send-notification', data);
+        };
+        this.sendSocketNotifs = (socketname, data) => {
+            this.socket.emit(socketname, data);
         };
         console.log("SocketService is called");
         this.socket = socket_io_client__WEBPACK_IMPORTED_MODULE_3__(src_environments_environment__WEBPACK_IMPORTED_MODULE_2__["environment"].BASE_URL, { forceNew: true });
@@ -3471,7 +3529,9 @@ const environment = {
         CREATEEXPENSE: 'createExpense',
         UPDATEEXPENSE: 'updateExpense',
         EXPENSE_DETAILS: 'details',
-        LIST: 'list'
+        LIST: 'list',
+        NOTIFICATIONS: 'notifications',
+        UPDATE: 'update'
     }
 };
 /*
