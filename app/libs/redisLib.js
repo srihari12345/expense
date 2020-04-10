@@ -1,9 +1,9 @@
 //redis lib
 const check = require("./checkLib.js");
-const redis = require('redis');
-let client = redis.createClient();
+const redis = require('redis').createredis(process.env.REDIS_URL);;
 
-client.on('connect', () => {
+
+redis.on('connect', () => {
 
     console.log("Redis connection successfully opened");
 
@@ -11,7 +11,7 @@ client.on('connect', () => {
 
 let getAllUsersInAHash = (hashName, callback) => {
 
-    client.HGETALL(hashName, (err, result) => {
+    redis.HGETALL(hashName, (err, result) => {
         
 
         if (err) {
@@ -40,7 +40,7 @@ let getAllUsersInAHash = (hashName, callback) => {
 // function to set new online user.
 let setANewOnlineUserInHash = (hashName, key, value, callback) => {
    
-    client.HMSET(hashName, [
+    redis.HMSET(hashName, [
         key, value
     ], (err, result) => {
         if (err) {
@@ -59,7 +59,7 @@ let setANewOnlineUserInHash = (hashName, key, value, callback) => {
 
 let deleteUserFromHash = (hashName,key)=>{
 
-    client.HDEL(hashName,key);
+    redis.HDEL(hashName,key);
     return true;
 
 }// end delete user from hash
